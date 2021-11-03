@@ -19,6 +19,9 @@ import Countries from './components/views/Countries/CountriesContainer';
 import Country from './components/views/Country/CountryContainer';
 import Regions from './components/views/Regions/RegionsContainer';
 
+import {AnimatedSwitch} from 'react-router-transition';
+import styles from './styles/app.scss';
+
 class App extends React.Component {
   static propTypes = {
     trips: PropTypes.array,
@@ -42,17 +45,23 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <MainLayout>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/trips' component={Trips} />
-            <Route exact path='/trip/:id' component={Trip} />
-            <Route exact path='/countries' component={Countries} />
-            <Route exact path='/country/:id' component={Country} />
-            <Route exact path='/regions' component={Regions} />
-            {/* TODO - add more routes for other views */}
-            <Route exact path='/info' component={Info} />
-            <Route path='*' component={NotFound} />
-          </Switch>
+          <AnimatedSwitch
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            className={styles.switchWrapper}
+          >
+              <Route exact path='/' component={Home} />
+              <Route exact path='/trips' component={Trips} />
+              <Route exact path='/trip/:id' component={Trip} />
+              <Route exact path='/countries' component={Countries} />
+              <Route exact path='/country/:id' component={Country} />
+              <Route exact path='/regions' component={Regions} />
+              {/* TODO - add more routes for other views */}
+              <Route exact path='/info' component={Info} />
+              <Route path='*' component={NotFound} />
+
+          </AnimatedSwitch>
         </MainLayout>
       </BrowserRouter>
     );
