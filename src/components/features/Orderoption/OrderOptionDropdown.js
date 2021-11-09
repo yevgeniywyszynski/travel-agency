@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './OrderOption.scss';
+import styles from './OrderOption.module.scss';
 import { formatPrice } from '../../../utils/formatPrice';
 
 const OrderOptionDropdown = ({values, required, currentValue, setOptionValue}) => (
