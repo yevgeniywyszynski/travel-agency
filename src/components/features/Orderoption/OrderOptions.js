@@ -6,6 +6,7 @@ import OrderOptionNumber from './OrderOptionNumber';
 import OrderOptionCheckboxes from './OrderOptionCheckboxes';
 import OrderOptionText from './OrderOptionText';
 import OrderOptionDate from './OrderOptionDate';
+import PropTypes from 'prop-types';
 
 const optionTypes = {
     dropdown: OrderOptionDropdown,
@@ -31,6 +32,13 @@ const OrderOptions = ({name, type, id, setOrderOption, ...otherProps}) => {
       </div>
     );
   }
+};
+
+OrderOptions.propTypes = {
+  id: PropTypes.node,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  setOrderOption: PropTypes.func,
 };
 
 export default OrderOptions;
