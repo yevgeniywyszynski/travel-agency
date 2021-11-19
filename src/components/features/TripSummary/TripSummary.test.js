@@ -2,42 +2,48 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import TripSummary from './TripSummary';
 
-describe('Component TripSummary', () => {
-  it('corect generated link', () => {
+describe('component TripSummary', () => {
+
+  it('correct generated link', () => {
     const idValue = 'abc';
-    const component = shallow(<TripSummary id={idValue} tags={[]} />);
+
+    const component = shallow(<TripSummary id={idValue} tags={[]} />)
     expect(component.find('.link').prop('to')).toEqual(`/trip/${idValue}`);
-  })
+  });
 
-  it('if img has correct src and alt', () => {
-    const srcVaule = 'image.jpg';
-    const altValue = 'name';
-    const component = shallow(<TripSummary image={srcVaule} name={altValue} tags={[]} />);
-    expect(component.find('img').prop('src')).toEqual(srcVaule);
+  it('check correct src and alt for img', () => {
+    const srcValue = 'image.jpg';
+    const altValue = 'book';
+
+    const component = shallow(<TripSummary image={srcValue} name={altValue} tags={[]} />);
+    expect(component.find('img').prop('src')).toEqual(srcValue);
     expect(component.find('img').prop('alt')).toEqual(altValue);
-  })
+  });
 
-  it('should correct render name, cost, days', () => {
-    const titleValue = 'title.props';
-    const costValue = '111,222.33';
-    const daysValue = 3;
-    const component = shallow(<TripSummary name={titleValue} cost={costValue} days={daysValue} tags={[]} />);
+  it('correct generated props name, cost, days', () => {
+    const titleValue = 'title';
+    const cosValue = '222,333.11';
+    const days = 4;
+
+    const component = shallow(<TripSummary name={titleValue} cost={cosValue} days={days} tags={[]} />);
     expect(component.find('.title').text()).toEqual(titleValue);
-    expect(component.find('.details > span + span').text()).toEqual(`from ${costValue}`);
-    expect(component.find('.details > span:first-child').text()).toEqual(`${daysValue} days`);
+    expect(component.find('.details > span + span').text()).toEqual(`from ${cosValue}`);
+    expect(component.find('.details > span:first-child').text()).toEqual(`${days} days`);
   })
 
   it('generated tags', () => {
-    const tagsValue = ['nike', 'puma', 'diadora'];
+    const tagsValue = ['iphone', 'samsunf', 'nokia'];
+
     const component = shallow(<TripSummary tags={tagsValue} />);
-    for (let i=0; i<tagsValue.length; i++){
+    for(let i=0; i<tagsValue.length; i++){
       expect(component.find('.tags > span').at(i).text()).toEqual(tagsValue[i]);
     }
   })
 
   it('generated div without tags', () => {
-    const tagsValue =[];
-    const component = shallow(<TripSummary tags={tagsValue} />);
+    const tagsValue = [];
+
+    const component = shallow(<TripSummary tags={tagsValue} />)
     expect(component.exists('.tags')).toEqual(false);
   })
 })
