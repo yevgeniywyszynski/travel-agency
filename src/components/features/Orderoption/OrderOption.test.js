@@ -159,6 +159,29 @@ const optionTypes = {
                 expect(mockSetOrderOption).toBeCalledTimes(1);
                 expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: testValue});
             })
+            break;
+        }
+        case'checkboxes': {
+          it('generated checkboxes', () => {
+            const divCheckboxes = renderedSubcomponent.find('.checkboxes');
+            expect(divCheckboxes).toBeTruthy();
+
+            const labels = divCheckboxes.find('label');
+            expect(labels.length).toBe(2);
+
+            const inputs = renderedSubcomponent.find('input');
+            inputs.forEach((input) => {
+              expect(input.prop('type')).toBe('checkbox');
+            })
+          })
+
+          it('interaction', () => {
+            const found = renderedSubcomponent.findWhere((element) =>  element.prop('value') == testValue)
+            found.simulate('change', {currentTarget : {checked: true}});
+            expect(mockSetOrderOption).toBeCalledTimes(1);
+            expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: [mockProps.currentValue, testValue]});
+          })
+          break;
         }
         default: {
             break;
