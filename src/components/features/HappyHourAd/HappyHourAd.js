@@ -3,13 +3,19 @@ import { formatTime } from '../../../utils/formatTime';
 import styles from './HappyHourAd.module.scss';
 
 class HappyHour extends React.Component {
-  constructor(){
-    super();
-
-    setInterval( () => (
+  componentDidMount() {
+    let intervalId = setInterval(() => {
       this.forceUpdate()
-    ), 1000)
+    }, 1000);
+    this.setState({intervalId: intervalId});
   }
+
+  componentWillUnmount(){
+    if(this.state.intervalId) {
+      clearInterval(this.state.intervalId)
+    }
+  }
+
   getCountdownTime(){
     const date = new Date();
     let currentDate = date.getTime();
