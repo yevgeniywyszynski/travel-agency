@@ -26,7 +26,6 @@ const OrderOptionCheckboxes = ({values, currentValue, setOptionValue}) =>  {
                  {value.name} {value.price}
             </label>
             )}
-
     </div>
     )
 };
